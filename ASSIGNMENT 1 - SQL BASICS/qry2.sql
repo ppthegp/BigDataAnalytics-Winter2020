@@ -27,3 +27,22 @@ CREATE TABLE exp_record
 --FROM 'G:\IIITD\Sem2\BDA\Assignment 1\data\ghtorrent-logs.txt' 
 --DELIMITER  
 --USING DELIMITERS ',' WITH NULL AS 'null_string';
+
+
+--drop table repolist
+CREATE TABLE repolist
+(
+	id int ,
+	url varchar,
+	ownerId int,
+	rname varchar,
+	langName varchar,
+	createdAt timestamp without time zone,
+	forkedFrom varchar ,
+	deleted int,
+	updatedAt varchar
+)
+
+COPY repolist(id,url,ownerId,rname,langName, createdAt, forkedFrom,deleted,updatedAt) 
+FROM 'G:\IIITD\Sem2\BDA\Assignment 1\important-repos.csv' DELIMITER ',' CSV HEADER NULL AS 'null' 
+ 

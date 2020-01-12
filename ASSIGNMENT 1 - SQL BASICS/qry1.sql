@@ -28,9 +28,8 @@ CREATE OR REPLACE FUNCTION assignment1.convertText(IN fileName text)
    						RAISE EXCEPTION 'IOError';
 					END IF;
 					ldata := regexp_split_to_array(lrow.row, ',');
-					restData := ldata[3] || COALESCE (ldata[4],'') || COALESCE (ldata[5],'') ||
+					restData := ldata[3] || COALESCE (ldata[4],'') || COALESCE (ldata[5],'') || COALESCE (ldata[6],'') ||
 								COALESCE (ldata[7],'') || COALESCE (ldata[8],'');
-					raise notice 'hello %', restData;
 					lid := regexp_split_to_array(restData, '--');
 					lstage := regexp_split_to_array(lid[2], '.rb');
 					INSERT INTO assignment1.ghlogs(loglevel, logtime, downloaderid, retrivalstage, msg)
@@ -38,7 +37,7 @@ CREATE OR REPLACE FUNCTION assignment1.convertText(IN fileName text)
 						,TRIM(lstage[1]::varchar), TRIM(lstage[2]::varchar));
 				EXCEPTION 
 				WHEN others THEN    
-        			RAISE NOTICE 'ERROR %', SQLERRM ;
+        			--RAISE NOTICE 'ERROR %', SQLERRM ;
 					INSERT INTO EXP_RECORD(row,exception) VALUES (lrow,SQLERRM);
 				END;
 			END LOOP;
@@ -49,7 +48,7 @@ CREATE OR REPLACE FUNCTION assignment1.convertText(IN fileName text)
 
 
 --select convertText('G:\IIITD\Sem2\BDA\Assignment 1\data\ghtorrent-logs.txt')
-
+--select count(*) from dumping
 --select count(*) from ghlogs limit 100 --9669691
 --select * from exp_record 
 --truncate table ghlogs
