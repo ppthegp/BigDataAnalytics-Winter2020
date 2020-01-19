@@ -1,5 +1,7 @@
 set search_path = assignment1
  
+CREATE SCHEMA IF NOT EXISTS assignment1; 
+
 -- drop table ghlogs
 CREATE TABLE ghlogs
 (
@@ -9,13 +11,10 @@ CREATE TABLE ghlogs
   	downloaderID varchar,
 	retrivalStage varchar,
 	msg varchar
+	repos varchar default ''
 );
 
-CREATE TABLE DUMPING ( row varchar);
- 
-COPY DUMPING(row) FROM 'G:\IIITD\Sem2\BDA\Assignment 1\data\ghtorrent-logs.txt' 
-
-select * from dumping limit 100
+Alter table ghlogs add column repos varchar default ''
 
 CREATE TABLE exp_record
 (
@@ -23,11 +22,14 @@ CREATE TABLE exp_record
 	exception varchar
 )
 
+CREATE TABLE DUMPING ( row varchar);
+ 
+COPY DUMPING(row) FROM 'G:\IIITD\Sem2\BDA\Assignment 1\data\ghtorrent-logs.txt' 
+
 --COPY log(loglevel,logtime,message,remaining,total)
 --FROM 'G:\IIITD\Sem2\BDA\Assignment 1\data\ghtorrent-logs.txt' 
 --DELIMITER  
 --USING DELIMITERS ',' WITH NULL AS 'null_string';
-
 
 --drop table repolist
 CREATE TABLE repolist

@@ -28,8 +28,8 @@ CREATE OR REPLACE FUNCTION assignment1.convertText(IN fileName text)
    						RAISE EXCEPTION 'IOError';
 					END IF;
 					ldata := regexp_split_to_array(lrow.row, ',');
-					restData := ldata[3] || COALESCE (ldata[4],'') || COALESCE (ldata[5],'') || COALESCE (ldata[6],'') ||
-								COALESCE (ldata[7],'') || COALESCE (ldata[8],'');
+					restData := ldata[3] || COALESCE (ldata[4],'') || COALESCE (ldata[5],'') || 
+							COALESCE (ldata[6],'') || COALESCE (ldata[7],'') || COALESCE (ldata[8],'');
 					lid := regexp_split_to_array(restData, '--');
 					lstage := regexp_split_to_array(lid[2], '.rb');
 					INSERT INTO assignment1.ghlogs(loglevel, logtime, downloaderid, retrivalstage, msg)
